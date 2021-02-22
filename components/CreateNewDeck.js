@@ -1,56 +1,37 @@
-import React, { Component } from 'react';
-import {StyleSheet, Text,TextInput,View} from 'react-native';
-import { connect } from 'react-redux';
-import { NavigationActions, StackActions  } from 'react-navigation';
-import { black, white, azureWhite} from '../utils/colors';
-import { addDeck } from '../actions/decks';
-import Button from './Button';
-import { createDeck} from '../utils/_DATA';
-
+import React, { Component } from "react";
+import { StyleSheet, Text, TextInput, View } from "react-native";
+import { connect } from "react-redux";
+import { NavigationActions, StackActions } from "react-navigation";
+import { black, white, azureWhite } from "../utils/colors";
+import { addDeck } from "../actions/decks";
+import Button from "./Button";
+import { createDeck } from "../utils/_DATA";
 
 class CreateNewDeck extends Component {
   static navigationOptions = {
-    title: 'Create Deck',
+    title: "Create Deck",
   };
 
   state = {
-    text: ''
-  }
+    text: "",
+  };
 
   submitDeckTitle = () => {
     const deckTitle = this.state.text;
 
-    createDeck(deckTitle)
+    createDeck(deckTitle);
 
-    this.props.dispatch(addDeck({
-      [deckTitle]: {
-        title: deckTitle,
-        cards: []
-      }
-    }))
+    this.props.dispatch(
+      addDeck({
+        [deckTitle]: {
+          title: deckTitle,
+          cards: [],
+        },
+      })
+    );
 
     this.props.navigation.navigate("Home");
-
-    //const resetAction = StackActions.reset({
-    //  index: 1,
-    //  actions: [
-    //    NavigationActions.navigate({ routeName: 'Home' }),
-    //    NavigationActions.navigate({ routeName: 'Deck', params: { title: deckTitle } })
-    //  ],
-    //});
-
-    //this.props.navigation.dispatch(resetAction);
-
-
-    //this.props.navigation.dispatch(NavigationActions.reset(
-    //  {
-    //    index: 1,
-    //    actions: [
-    //      NavigationActions.navigate({ routeName: 'Home' }),
-    //      NavigationActions.navigate({ routeName: 'Deck', params: { title: deckTitle } })
-    //    ]
-    //  }));
-  }
+  };
 
   render() {
     return (
@@ -61,12 +42,9 @@ class CreateNewDeck extends Component {
         <TextInput
           style={styles.textInput}
           value={this.state.text}
-          onChangeText={(text) => this.setState({text})}
+          onChangeText={(text) => this.setState({ text })}
         />
-        <Button
-          onPress={this.submitDeckTitle}
-          text={'Submit'}
-        />
+        <Button onPress={this.submitDeckTitle} text={"Submit"} />
       </View>
     );
   }
@@ -75,14 +53,14 @@ class CreateNewDeck extends Component {
 const styles = StyleSheet.create({
   form: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    justifyContent: "flex-start",
+    alignItems: "center",
     paddingTop: 50,
-    backgroundColor: azureWhite
+    backgroundColor: azureWhite,
   },
   textInstructions: {
     width: 200,
-    fontSize: 20
+    fontSize: 20,
   },
   textInput: {
     width: 200,
@@ -90,10 +68,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderColor: black,
     borderWidth: 1,
-    borderRadius:4,
+    borderRadius: 4,
     color: black,
-    backgroundColor: white
-  }
-})
+    backgroundColor: white,
+  },
+});
 
 export default connect()(CreateNewDeck);
