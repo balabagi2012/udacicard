@@ -1,23 +1,32 @@
-import React from 'react';
-// import { StackNavigator } from 'react-navigation';
-import { lightestBlue, black } from '../utils/colors';
-
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-import Home from './Home';
-import CreateNewDeck from './CreateNewDeck';
-import Deck from './Deck';
-import CreateNewCard from './CreateNewCard';
-import Quiz from './Quiz';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import React from "react";
+import CreateNewCard from "./CreateNewCard";
+import CreateNewDeck from "./CreateNewDeck";
+import Deck from "./Deck";
+import Home from "./Home";
+import Quiz from "./Quiz";
 
 const Stack = createStackNavigator();
+const DeckTab = createBottomTabNavigator();
+const DeckTabScreen = ({ navigation, route }) => {
+  return (
+    <DeckTab.Navigator>
+      <DeckTab.Screen name="Home" component={Home}></DeckTab.Screen>
+      <DeckTab.Screen
+        name="Add Deck"
+        component={CreateNewDeck}
+      ></DeckTab.Screen>
+    </DeckTab.Navigator>
+  );
+};
 
 function AppContainer() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Home" component={DeckTabScreen} />
         <Stack.Screen name="CreateNewDeck" component={CreateNewDeck} />
         <Stack.Screen name="Deck" component={Deck} />
         <Stack.Screen name="CreateNewCard" component={CreateNewCard} />
@@ -28,7 +37,6 @@ function AppContainer() {
 }
 
 export default AppContainer;
-
 
 // const AppContainer = StackNavigator(
 //   {
