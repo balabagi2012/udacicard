@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps (state) {
   return {
-    deck: state.decks[state.quiz.title],
-    currentCardIndex: state.quiz.currentCardIndex
+    deck: state.decks[state.questions.title],
+    currentCardIndex: state.questions.currentCardIndex
   };
 }
 

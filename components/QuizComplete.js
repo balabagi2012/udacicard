@@ -62,8 +62,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps (state) {
   return {
-    score: state.quiz.score,
-    cardQuantity: state.decks[state.quiz.title].cards.length
+    score: state.questions.score,
+    cardQuantity: state.decks[state.questions.title].cards.length
   };
 }
 

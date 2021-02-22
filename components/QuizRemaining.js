@@ -24,11 +24,11 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps (state) {
-  const deck = state.decks[state.quiz.title];
+  const deck = state.decks[state.questions.title];
   const totalCards = deck.cards.length;
 
   return {
-    remaining: totalCards - state.quiz.currentCardIndex,
+    remaining: totalCards - state.questions.currentCardIndex,
   };
 }
 

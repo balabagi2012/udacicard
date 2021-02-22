@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps (state) {
   return {
-    showAnswer: state.quiz.showAnswer
+    showAnswer: state.questions.showAnswer
   };
 }
 

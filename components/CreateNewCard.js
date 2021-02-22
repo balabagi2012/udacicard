@@ -39,7 +39,7 @@ class CreateNewCard extends Component {
         <TextInput
           multiline={true}
           style={styles.textInput}
-          value={this.state.questionText}
+          value={this.state.questionsText}
           placeholder={"Enter your question"}
           onChangeText={(questionText) =>
             this.setState({ questionText: questionText })

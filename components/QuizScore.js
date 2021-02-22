@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps (state) {
   return {
-    score: state.quiz.score,
+    score: state.questions.score,
   };
 }
 
