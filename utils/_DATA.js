@@ -42,9 +42,7 @@ export function getDecks() {
 }
 
 export function setDecks(decks) {
-  return AsyncStorage.setItem(DATA_KEY, JSON.stringify(decks)).then((res) => {
-    return JSON.parse(res);
-  });
+  return AsyncStorage.setItem(DATA_KEY, JSON.stringify(decks));
 }
 
 export function createDeck(title) {
