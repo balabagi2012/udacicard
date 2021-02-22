@@ -1,19 +1,23 @@
-import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
-import { connect } from 'react-redux';
-import { getDecks } from '../utils/_DATA';
-import { loadDecks } from '../actions/decks';
+import React, { Component } from "react";
+import { ScrollView } from "react-native";
+import { connect } from "react-redux";
+import { getDecks } from "../utils/_DATA";
+import { loadDecks } from "../actions/decks";
 
-import { lightBlue, lighterBlue, lightestBlue, azureWhite } from '../utils/colors';
+import {
+  lightBlue,
+  lighterBlue,
+  lightestBlue,
+  azureWhite,
+} from "../utils/colors";
 
-import DeckListItem from './DeckListItem';
+import DeckListItem from "./DeckListItem";
 
 class DeckList extends Component {
   componentDidMount() {
-    getDecks()
-      .then((decks) => {
-        this.props.dispatch(loadDecks(decks))
-      })
+    getDecks().then((decks) => {
+      this.props.dispatch(loadDecks(decks));
+    });
   }
 
   render() {
@@ -21,10 +25,10 @@ class DeckList extends Component {
 
     return (
       <ScrollView>
-        {this.props.decks.map((deck, i) => (
+        {this.props?.decks?.map((deck, i) => (
           <DeckListItem
             title={deck.title}
-            amountOfCards={deck.cards.length}
+            amountOfCards={deck?.cards?.length ? deck.cards.length : 0}
             key={deck.title}
             navigation={this.props.navigation}
             backgroundColor={azureWhite}
@@ -35,12 +39,12 @@ class DeckList extends Component {
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   const deckKeys = Object.keys(state.decks);
-  const decks = deckKeys.map(key => state.decks[key]);
+  const decks = deckKeys.map((key) => state.decks[key]);
 
   return {
-    decks: decks
+    decks: decks,
   };
 }
 

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
 import { setQuizTitle } from "../actions/questions";
+import { removeDeck } from "../actions/decks";
+
 import { getFormattedCards } from "../utils/helpers";
 import { azureWhite } from "../utils/colors";
 import Button from "./Button";
@@ -30,16 +32,21 @@ class Deck extends Component {
   };
 
   deckHasCards = () => {
-    return this.props.deck.cards.length > 0;
+    return this.props?.deck?.cards.length > 0;
+  };
+
+  removeDeck = (deck) => {
+    this.props.dispatch(removeDeck(deck));
+    this.props.navigation.goBack();
   };
 
   render() {
     const { deck } = this.props;
 
-    return (
+    return deck ? (
       <View style={styles.container}>
         <Text style={styles.bodyText}>
-          {`This deck has ${getFormattedCards(deck.cards.length)}`}
+          {`This deck has ${getFormattedCards(deck?.cards?.length)}`}
         </Text>
         <Button onPress={this.handleNewDeck} text={"Create a New Card"} />
         {deck.cards.length === 0 ? (
@@ -47,8 +54,9 @@ class Deck extends Component {
         ) : (
           <Button onPress={this.handleQuizStart} text={"Start a Quiz"} />
         )}
+        <Button onPress={() => this.removeDeck(deck)} text={"Remove Deck"} />
       </View>
-    );
+    ) : null;
   }
 }
 
@@ -75,5 +83,3 @@ function mapStateToProps(state, { navigation, route }) {
 }
 
 export default connect(mapStateToProps)(Deck);
-
-
